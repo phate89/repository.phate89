@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.videomediaset" name="Mediaset Play" provider-name="phate89, aracnoz" version="2.0.1">
+<addon id="plugin.video.comingsoon.it" name="Comingsoon Trailer" version="1.2.1+matrix.1" provider-name="phate89">
+  <requires>
+	<import addon="xbmc.python" version="3.0.0"/>
+	<import addon="script.module.beautifulsoup4" version="4.3.1"/>
+	<import addon="script.module.phate89" version="2.0.1"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+	<platform>all</platform>
+  	<language>it</language>
+    <summary lang="it">Guarda i traiiler dei film da www.comingsoon.it</summary>
+	<summary lang="en">Watch trailers from www.comingsoon.it</summary>
+    <summary lang="it_IT">Guarda i traiiler dei film da www.comingsoon.it</summary>
+	<summary lang="en_GB">Watch trailers from www.comingsoon.it</summary>
+    <description lang="it">Visualizza i trailer dei film in sala e in arrivo dal sito www.comingsoon.it</description>
+	<description lang="en">Watch the shows and the complete episodes from the website www.comingsoon.it</description>
+    <description lang="it_IT">Visualizza i trailer dei film in sala e in arrivo dal sito www.comingsoon.it</description>
+	<description lang="en_GB">Watch the shows and the complete episodes from the website www.comingsoon.it</description>
+	<forum>https://forum.kodi.tv/showthread.php?tid=214378</forum>
+    <website>https://github.com/phate89/plugin.video.comingsoon.it</website>
+    <source>https://github.com/phate89/plugin.video.comingsoon.it</source>
+    <license>GPL-2.0-only</license>
+    <news>v1.2.1
+Fixed addon after page changes</news>
+    <assets>
+        <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon>
+
+<addon id="plugin.video.videomediaset" name="Mediaset Play" provider-name="phate89, aracnoz" version="2.0.2+matrix.1">
     <requires>
-        <import addon="xbmc.python" version="2.25.0" />
-        <import addon="script.module.phate89" version="1.2.1~beta2"/>
+        <import addon="xbmc.python" version="2.0.0" />
+        <import addon="script.module.phate89" version="1.2.1"/>
         <import addon="script.module.inputstreamhelper" version="0.0.1"/>
     </requires>
     <extension library="default.py" point="xbmc.python.pluginsource">
@@ -39,7 +71,7 @@
     </extension>
 </addon>
 
-<addon id="repository.phate89" name="Phate89 Kodi Repository" version="1.0.0" provider-name="phate89">
+<addon id="repository.phate89" name="Phate89 Kodi Repository" version="1.0.1" provider-name="phate89">
     <extension point="xbmc.addon.repository" name="Phate89 Kodi Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/phate89/repository.phate89/master/zips/addons.xml</info>
@@ -60,24 +92,25 @@
     </extension>
 </addon>
 
-<addon id="script.module.phate89" name="phate89 helper module" version="1.2.1~beta2" provider-name="phate89">
+<addon id="script.module.phate89" name="phate89 helper module" version="1.2.1+matrix.1" provider-name="phate89">
 	<requires>
-		<import addon="xbmc.python" version="2.24.0"/>
+		<import addon="xbmc.python" version="3.0.0"/>
 		<import addon="script.module.requests" version="2.9.1"/>
-        <import addon="script.module.beautifulsoup4" version="4.3.1" />
-        <import addon="script.module.simplejson" version="2.0.10"/>
+		<import addon="script.module.beautifulsoup4" version="4.3.1" />
 		<import addon="script.module.html5lib" version="0.999.0"/>
-		<import addon="script.module.kodi-six" version="0.0.5"/>
 	</requires>
 	<extension point="xbmc.python.module" library="lib" />
 	<extension point="xbmc.addon.metadata">
-		<summary lang="en">Helper module</summary>
-		<description lang="en">Helper module for addons</description>
-		<summary lang="it">Helper module</summary>
-		<description lang="it">Modulo di aiuto per gli addon</description>
+		<summary lang="en_GB">Helper module</summary>
+		<description lang="en_GB">Helper module for addons</description>
+		<summary lang="it_IT">Helper module</summary>
+		<description lang="it_IT">Modulo di aiuto per gli addon</description>
 		<platform>all</platform>
 		<license>GPL-2.0-only</license>
 		<source>https://github.com/phate89/script.module.phate89</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
 	</extension>
 </addon>
 </addons>
