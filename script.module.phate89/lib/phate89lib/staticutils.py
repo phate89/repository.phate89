@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from urllib.parse import urlencode, parse_qsl
+try:
+    from urllib.parse import urlencode, parse_qsl
+except ImportError:
+    from urllib import urlencode
+    from urlparse import parse_qsl
 import sys
 import re
 import unicodedata
 from datetime import datetime
 import time
-
+from kodi_six.utils import py2_encode as py2_enc
 
 PY2 = sys.version_info[0] == 2
 
@@ -19,7 +23,7 @@ def getParams():
 
 def parameters(p):
     for k, v in list(p.items()):
-        p[k] = v
+        p[k] = py2_enc(v)
     return sys.argv[0] + '?' + urlencode(p)
 
 
@@ -98,3 +102,7 @@ def get_timestamp_midnight(dt=None):
 
 def get_date_from_timestamp(dt):
     return datetime.fromtimestamp(dt / 1e3)
+
+
+def py2_encode(s):
+    py2_enc(s)

@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 import os
 import shutil
 import zipfile
-from json.decoder import JSONDecodeError
 import requests
 from bs4 import BeautifulSoup
+from . import staticutils
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 
 class RUtils(object):
@@ -123,9 +128,9 @@ class RUtils(object):
 
             if binData:
                 try:
-                    with open(outName, 'wb') as fp:
-                        fp.write(binData)
-                        fp.close()
+                    fp = open(outName, 'wb')
+                    fp.write(binData)
+                    fp.close()
                 except EnvironmentError:
                     self.log("Error writing text subtitle file")
                     return False
@@ -135,7 +140,7 @@ class RUtils(object):
                 return False
         elif ext == 'rar':
             try:
-                import xbmc
+                from kodi_six import xbmc
             except ImportError:
                 self.log('rar extraction not supported', 1)
                 return False
@@ -143,7 +148,7 @@ class RUtils(object):
             if os.path.isdir(TEMPFOLDER):
                 shutil.rmtree(TEMPFOLDER)
             os.makedirs(TEMPFOLDER)
-            xbmc.executebuiltin('Extract(%s,%s)' % (TEMPFILE, TEMPFOLDER), True)
+            xbmc.executebuiltin('XBMC.Extract(%s,%s)' % (TEMPFILE, TEMPFOLDER), True)
             exts = ['.srt', '.sub', '.txt', '.smi', '.ssa', '.ass']
             subs = [os.path.join(root, name)
                     for root, dirs, files in os.walk(TEMPFOLDER)

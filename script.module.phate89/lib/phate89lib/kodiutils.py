@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import re
 import sys
-from urllib.parse import urlencode
-import json
-import xbmc
-import xbmcaddon
-import xbmcplugin
-import xbmcgui
+from kodi_six import xbmc, xbmcaddon, xbmcplugin, xbmcgui, utils  # pylint: disable=import-error
+try:
+    from urllib.parse import urlencode
+except ImportError:
+    from urllib import urlencode
 from . import staticutils
+if sys.version_info < (2, 7):
+    import simplejson as json
+else:
+    import json
 
 ADDON = xbmcaddon.Addon()
 ID = ADDON.getAddonInfo('id')
@@ -30,7 +34,8 @@ def executebuiltin(func, block=False):
 
 
 def notify(msg):
-    xbmcgui.Dialog().notification(ID, msg)
+    message = 'Notification(%s,%s)' % (ID, msg)
+    xbmc.executebuiltin(message)
 
 
 def log(msg, level=2):
@@ -44,11 +49,11 @@ def log(msg, level=2):
 
 
 def py2_decode(s):
-    return s
+    return utils.py2_decode(s)
 
 
 def py2_encode(s):
-    return s
+    return utils.py2_encode(s)
 
 
 def getSetting(setting):
@@ -136,9 +141,15 @@ def append_subtitle(sUrl, subtitlename, sync=False, provider=None):
     #listitem = createListItem({'label': 'Italian', 'label2': subtitlename, 'thumbnailImage': 'it'})
     if not provider:
         tUrl = {'action': 'download', 'subid': sUrl}
+    elif provider == 'ItalianSubs':
+        p = re.search('subtitle_id=(?P<SUBID>[0-9]+)', sUrl, re.IGNORECASE)
+        if not p:
+            return False
+        tUrl = "plugin://service.subtitles.itasa/?action=download&subid={subid}".format(
+            subid=p.group('SUBID'))
     else:
         tUrl = {'action': 'download', 'url': sUrl}
-    log("Add subtitle '" + subtitlename + "' to the kist", 3)
+    log("aggiungo il sottotitolo '" + subtitlename + "' alla lista", 3)
     return addListItem(label="Italian", label2=subtitlename, params=tUrl, thumb="it",
                        properties={"sync": 'true' if sync else 'false', "hearing_imp": "false"},
                        isFolder=False)
@@ -166,13 +177,13 @@ def getShowID():
     json_query = xbmc.executeJSONRPC((
         '{"jsonrpc":"2.0","method":"Player.GetItem","params":'
         '{"playerid":1,"properties":["tvshowid"]},"id":1}'))
-    jsn_player_item = json.loads(json_query, 'utf-8', errors='ignore')
+    jsn_player_item = json.loads(utils.py2_decode(json_query, 'utf-8', errors='ignore'))
     if 'result' in jsn_player_item and jsn_player_item['result']['item']['type'] == 'episode':
         json_query = xbmc.executeJSONRPC((
             '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetTVShowDetails","params":'
             '{"tvshowid":%s, "properties": ["imdbnumber"]}}') % (
                 jsn_player_item['result']['item']['tvshowid']))
-        jsn_ep_det = json.loads(json_query, 'utf-8', errors='ignore')
+        jsn_ep_det = json.loads(utils.py2_decode(json_query, 'utf-8', errors='ignore'))
         if 'result' in jsn_ep_det and jsn_ep_det['result']['tvshowdetails']['imdbnumber'] != '':
             return str(jsn_ep_det['result']['tvshowdetails']['imdbnumber'])
     return False
