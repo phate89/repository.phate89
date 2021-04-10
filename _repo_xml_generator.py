@@ -118,7 +118,7 @@ class Generator:
                 # loop thru cleaning each line
                 ver_found = False
                 for line in xml_lines:
-                    if line.find( "<?xml" ) >= 0:
+                    if line.find("<?xml") >= 0:
                         continue
                     if 'version="' in line and not ver_found:
                         version = re.compile('version="(.+?)"').findall(line)[0]
