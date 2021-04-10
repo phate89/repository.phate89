@@ -1,3 +1,9 @@
 [submodule "plugin.video.comingsoon.it"]
 	path = plugin.video.comingsoon.it
 	url = https://github.com/phate89/plugin.video.comingsoon.it.git
+[submodule "script.module.phate89"]
+	path = script.module.phate89
+	url = https://github.com/phate89/script.module.phate89.git
+[submodule "plugin.video.videomediaset"]
+	path = plugin.video.videomediaset
+	url = https://github.com/phate89/Mediaset-Play-plugin.video.videomediaset.git
