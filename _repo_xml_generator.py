@@ -6,7 +6,7 @@
     zip up all add-on folders, create a new zip in your zips folder
     and then update the md5 and addons.xml file
 
-Recoded by whufclee (info@totalrevolution.tv) 
+    Recoded by whufclee (info@totalrevolution.tv) 
 """
 
 
