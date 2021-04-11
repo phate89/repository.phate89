@@ -12,17 +12,12 @@
   <extension point="xbmc.addon.metadata">
 	<platform>all</platform>
   	<language>it</language>
-    <summary lang="it">Guarda i traiiler dei film da www.comingsoon.it</summary>
-	<summary lang="en">Watch trailers from www.comingsoon.it</summary>
     <summary lang="it_IT">Guarda i traiiler dei film da www.comingsoon.it</summary>
 	<summary lang="en_GB">Watch trailers from www.comingsoon.it</summary>
-    <description lang="it">Visualizza i trailer dei film in sala e in arrivo dal sito www.comingsoon.it</description>
-	<description lang="en">Watch the shows and the complete episodes from the website www.comingsoon.it</description>
     <description lang="it_IT">Visualizza i trailer dei film in sala e in arrivo dal sito www.comingsoon.it</description>
 	<description lang="en_GB">Watch the shows and the complete episodes from the website www.comingsoon.it</description>
 	<forum>https://forum.kodi.tv/showthread.php?tid=214378</forum>
     <website>https://github.com/phate89/plugin.video.comingsoon.it</website>
-    <email></email>
     <source>https://github.com/phate89/plugin.video.comingsoon.it</source>
     <license>GPL-2.0-only</license>
     <news>v1.2.1
@@ -33,10 +28,10 @@ Fixed addon after page changes</news>
   </extension>
 </addon>
 
-<addon id="plugin.video.videomediaset" name="Mediaset Play Infinity" provider-name="phate89, aracnoz" version="2.0.6+matrix.1">
+<addon id="plugin.video.videomediaset" name="Mediaset Play Infinity" provider-name="phate89, aracnoz" version="2.0.7+matrix.1">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="script.module.phate89" version="1.2.1"/>
+        <import addon="script.module.phate89" version="1.2.1+matrix.1"/>
         <import addon="script.module.inputstreamhelper" version="0.0.1"/>
     </requires>
     <extension library="default.py" point="xbmc.python.pluginsource">
@@ -53,9 +48,8 @@ Fixed addon after page changes</news>
         <forum>https://forum.kodi.tv/showthread.php?tid=292876</forum>
         <source>https://github.com/phate89/plugin.video.videomediaset</source>
         <reuselanguageinvoker>true</reuselanguageinvoker>
-        <news>2.0.6
-- update name and branding after mediaset branding change
-- Fix assets request after site change
+        <news>2.0.7
+- fix mistake in code refactoring
         </news>
         <assets>
             <icon>resources/icon.png</icon>
